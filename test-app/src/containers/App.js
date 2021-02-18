@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import classes from './App.module.css';
 import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
+import WithClass from "../hoc/WithClass";
 
 class App extends Component {
 
@@ -80,7 +81,7 @@ class App extends Component {
         }
 
         return (
-            <div className={classes.App}>
+            <WithClass classes={classes.App}>
                 <button
                     onClick={() => {this.setState({showCockpit: !this.state.showCockpit}); }}>
                     Remove Cockpit
@@ -92,7 +93,7 @@ class App extends Component {
                     personsLength={this.state.persons.length}
                     clicked={this.togglePersonsHandler}/> : null}
                 {persons}
-            </div>
+            </WithClass>
         );
         // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
     }
