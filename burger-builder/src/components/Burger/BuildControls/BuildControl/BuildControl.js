@@ -1,6 +1,6 @@
 import React from 'react';
 
-import classes from 'BuilControl.module.css';
+import classes from './BuilControl.module.css';
 
 const BuildControl = (props) => (
     <div className={classes.BuildControl}>
