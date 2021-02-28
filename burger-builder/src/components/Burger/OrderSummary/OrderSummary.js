@@ -1,27 +1,35 @@
-import React, { Fragment } from 'react';
+import React, {Component, Fragment} from 'react';
 
 import Button from "../../UI/Button/Button";
 
-const OrderSummary = (props) => {
+class OrderSummary extends Component {
 
-    const ingredientSummary = Object.keys(props.ingredients)
-        .map(igKey => {
-            return <li key={igKey}><span style={{textTransform: 'capitalize'}}>{igKey}</span>: {props.ingredients[igKey]}</li>
-        });
+    // This could be a functional component, doesn't have to be a class
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log('[OrderSummary] DidUpdate')
+    }
 
-    return (
-        <Fragment>
-            <h3>Your Order</h3>
-            <p>A delicious burger with the following ingredients:</p>
-            <ul>
-                {ingredientSummary}
-            </ul>
-            <p><strong>Total Price: {props.price.toFixed(2)}</strong></p>
-            <p>Continue to Checkout?</p>
-            <Button btnType="Danger" clicked={props.cancelOrder}>CANCEL</Button>
-            <Button btnType="Success" clicked={props.submitOrder}>CONTINUE</Button>
-        </Fragment>
-    );
-};
+    render() {
+        const ingredientSummary = Object.keys(this.props.ingredients)
+            .map(igKey => {
+                return <li key={igKey}><span
+                    style={{textTransform: 'capitalize'}}>{igKey}</span>: {this.props.ingredients[igKey]}</li>
+            });
+
+        return (
+            <Fragment>
+                <h3>Your Order</h3>
+                <p>A delicious burger with the following ingredients:</p>
+                <ul>
+                    {ingredientSummary}
+                </ul>
+                <p><strong>Total Price: {this.props.price.toFixed(2)}</strong></p>
+                <p>Continue to Checkout?</p>
+                <Button btnType="Danger" clicked={this.props.cancelOrder}>CANCEL</Button>
+                <Button btnType="Success" clicked={this.props.submitOrder}>CONTINUE</Button>
+            </Fragment>
+        );
+    }
+}
 
 export default OrderSummary;
