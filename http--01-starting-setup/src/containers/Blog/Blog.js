@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 //import axios from 'axios';
-import axios from '../../axios';
+import blogAxiosInstance from "../../blogAxiosInstance";
 
 import Post from '../../components/Post/Post';
 import FullPost from '../../components/FullPost/FullPost';
@@ -16,7 +16,7 @@ class Blog extends Component {
     }
 
     componentDidMount() {
-        axios.get('/posts')
+        blogAxiosInstance.get('/posts')
             .then(response => {
                 const posts = response.data.slice(0, 4);
                 const updatedPosts = posts.map(post => {
