@@ -6,6 +6,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
     return class extends Component {
 
         state = {
+            initialized: false,
             error: null
         }
 
@@ -17,6 +18,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
             axios.interceptors.response.use(res => res, error => {
                 this.setState({error: error});
             });
+            this.setState({initialized: true});
         }
 
         errorConfirmedHandler = () => {
@@ -24,6 +26,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
         }
 
         render() {
+            if (!this.state.initialized) return null;
             return (
                 <Fragment>
                     <Modal show={this.state.error} modalClosed={this.errorConfirmedHandler}>
